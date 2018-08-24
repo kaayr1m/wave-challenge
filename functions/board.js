@@ -18,6 +18,7 @@ function won(board, player) {
   let winDiagonal2 = false;
 
   // Horizotal Check
+  // n*(n+1) is a summation
   for (let row = 0; row <= n*(n-1); row+=n) {
     winHorizontal = true;
     for (let col = row; col < (row + n); ++col) {
@@ -30,6 +31,22 @@ function won(board, player) {
     if (winHorizontal) break;
   }
 
+  // Vertical Check
+  for (let col = 0; col < n; ++col) {
+    winVertical = true;
+    // +col adds offset from the left of the columns
+    // n*(n+1) is a summation
+    for (let row = col; row <= (n*(n-1))+col; row+=n) {
+      if (board[row] !== player) {
+        winVertical = false;
+        break;
+      }
+    }
+
+    if (winVertical) break;
+  }
+
+  // Diagnol Check
   winDiagonal1 = true;
   for (let i = 0; i < n*n; i += (n+1)) {
     if (board[i] !== player) {
@@ -39,6 +56,7 @@ function won(board, player) {
   }
 
   winDiagonal2 = true;
+  // n*(n+1) is a summation
   for (let i = n-1; i <= n*(n-1); i += (n-1)) {
     if (board[i] !== player) {
       winDiagonal2 = false;
