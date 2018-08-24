@@ -49,8 +49,8 @@ describe('Board', function() {
       let result = board._minimax(['x','x',' ',' ','o','o',' ',' ',' '], 'x');
       assert.equal(2, result.index);
     });
-    it('should be index 5 because o is about to win', function() {
-      let result = board._minimax(['x',' ',' ','o','o',' ',' ',' ',' '], 'x');
+    it('should be index 5 because x is about to win', function() {
+      let result = board._minimax(['o',' ',' ','x','x',' ',' ',' ',' '], 'o');
       assert.equal(5, result.index);
     });
   });

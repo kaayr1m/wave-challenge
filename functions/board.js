@@ -101,7 +101,7 @@ function minimax(board, player) {
 
     if (best === null) {
       best = {
-        index: m,
+        index: result.index || m,
         score: result.score
       }
     } else if (
