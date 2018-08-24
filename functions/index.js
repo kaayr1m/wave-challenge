@@ -2,6 +2,8 @@ const functions = require('firebase-functions');
 const express = require('express');
 const app = express();
 
+const board = require('./board');
+
 // Print response with '+' as symbol for space
 function toString(board) {
   return board.map(s => s === ' ' ? '+': s).join('');
