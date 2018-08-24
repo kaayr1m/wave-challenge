@@ -70,6 +70,9 @@ function won(board, player) {
 
 // Use minimax algorithm to find the best move
 function minimax(board, player) {
+  // Find the playable indexes
+  let moves = board.map((pos, index) => pos === ' '? index : null).filter(n => n !== null);
+
   // Determine if a player has already won
   // Return a score
   // 0 if tie
@@ -79,11 +82,9 @@ function minimax(board, player) {
     return -10;
   } else if (won(board, o)) {
     return 10;
-  } else {
+  } else if (moves.length === 0) {
     return 0;
   }
-
-  // Find the playable indexes
 
   // Loop through all the playable indexes
   // Play each possibility recursively
