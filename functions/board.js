@@ -79,11 +79,11 @@ function minimax(board, player) {
   // -10 if x wins
   // 10 if o wins
   if (won(board, x)) {
-    return -10;
+    return {score: -10};
   } else if (won(board, o)) {
-    return 10;
+    return {score: 10};
   } else if (moves.length === 0) {
-    return 0;
+    return {score: 0};
   }
 
   // Loop through all the playable indexes
@@ -102,15 +102,12 @@ function minimax(board, player) {
     if (best === null) {
       best = {
         index: m,
-        score: result
+        score: result.score
       }
     } else if (
-      (player === o && result < best.score) ||
-      (player === x && result > best.score)) {
-      best = {
-        index: m,
-        score: result
-      };
+      (player === o && result.score < best.score) ||
+      (player === x && result.score > best.score)) {
+      best = result;
     } else {
       // should not reach this point
     }

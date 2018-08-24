@@ -45,9 +45,13 @@ describe('Board', function() {
   });
 
   describe('best move for x to win', function() {
-    it('should be index 2', function() {
+    it('should be index 2 since x will win', function() {
       let result = board._minimax(['x','x',' ',' ','o','o',' ',' ',' '], 'x');
       assert.equal(2, result.index);
+    });
+    it('should be index 5 because o is about to win', function() {
+      let result = board._minimax(['x',' ',' ','o','o',' ',' ',' ',' '], 'x');
+      assert.equal(5, result.index);
     });
   });
 });
