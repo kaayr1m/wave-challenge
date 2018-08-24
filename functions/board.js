@@ -104,11 +104,20 @@ function minimax(board, player) {
         index: m,
         score: result
       }
+    } else if (
+      (player === o && result < best.score) ||
+      (player === x && result > best.score)) {
+      best = {
+        index: m,
+        score: result
+      };
+    } else {
+      // should not reach this point
     }
   });
   
   // Return the best move
-  return 0;
+  return best;
 }
 
 module.exports = {
