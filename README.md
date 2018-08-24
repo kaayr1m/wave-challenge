@@ -1,4 +1,3 @@
-# Wave Coding Challenge
-## Serverless Tic Tac Toe Playing Bot
+## Wave Coding Challenge - Serverless Tic Tac Toe Playing Bot
 
--[x] Timing myself when I start this repository
+- [x] Timing myself when I start this repository
