@@ -12,10 +12,23 @@ function won(board, player) {
   let n = Math.sqrt(board.length);
 
   // Possible wins
-  let winVertical = true;
-  let winHorizontal = true;
-  let winDiagonal1 = true;
-  let winDiagonal2 = true;
+  let winVertical = false;
+  let winHorizontal = false;
+  let winDiagonal1 = false;
+  let winDiagonal2 = false;
+
+  // Horizotal Check
+  for (let row = 0; row <= n*(n-1); row+=n) {
+    winHorizontal = true;
+    for (let col = row; col < (row + n); ++col) {
+      if (board[col] !== player) {
+        winHorizontal = false;
+        break;
+      }
+    }
+    
+    if (winHorizontal) break;
+  }
   
   // Can win if any of the patterns are true
   return (winHorizontal || winVertical || winDiagonal1 || winDiagonal2);
@@ -46,6 +59,8 @@ function minimax(board, player) {
 }
 
 module.exports = {
+  _won: won,
+  _minimax: minimax,
   myTurn() {
     let spots = {
       o: currentBoard.filter(s => s === o).length,
