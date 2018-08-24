@@ -29,6 +29,22 @@ function won(board, player) {
     
     if (winHorizontal) break;
   }
+
+  winDiagonal1 = true;
+  for (let i = 0; i < n*n; i += (n+1)) {
+    if (board[i] !== player) {
+      winDiagonal1 = false;
+      break;
+    }
+  }
+
+  winDiagonal2 = true;
+  for (let i = n-1; i <= n*(n-1); i += (n-1)) {
+    if (board[i] !== player) {
+      winDiagonal2 = false;
+      break;
+    }
+  }
   
   // Can win if any of the patterns are true
   return (winHorizontal || winVertical || winDiagonal1 || winDiagonal2);
