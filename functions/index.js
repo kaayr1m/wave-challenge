@@ -16,8 +16,8 @@ app.put('/:board', (req, res) => {
   let newBoard = req.params['board'].split('');
 
   if (board.myTurn()) {
-    board.play(newBoard);
-    res.send(board.current());
+    let current = board.play(newBoard);
+    res.send(current);
   } else {
     // Not the servers turn
     // Bad request

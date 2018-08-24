@@ -15,6 +15,8 @@ module.exports = {
   },
   play(board) {
     currentBoard = board;
+
+    return currentBoard;
   },
   current() {
     return currentBoard;
