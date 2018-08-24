@@ -5,6 +5,22 @@ let currentBoard = [ ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' ];
 // The server will always be 'o'
 const x = 'x', o = 'o';
 
+// 
+function won(board, player) {
+  // To allow nxn tic tac toe
+  // Get the n count of the board
+  let n = Math.sqrt(board.length);
+
+  // Possible wins
+  let winVertical = true;
+  let winHorizontal = true;
+  let winDiagonal1 = true;
+  let winDiagonal2 = true;
+  
+  // Can win if any of the patterns are true
+  return (winHorizontal || winVertical || winDiagonal1 || winDiagonal2);
+}
+
 // Use minimax algorithm to find the best move
 function minimax(board, player) {
   // Determine if a player has already won
@@ -12,7 +28,13 @@ function minimax(board, player) {
   // 0 if tie
   // -10 if x wins
   // 10 if o wins
-
+  if (won(board, x)) {
+    return -10;
+  } else if (won(board, o)) {
+    return 10;
+  } else {
+    return 0;
+  }
 
   // Find the playable indexes
 
