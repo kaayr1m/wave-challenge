@@ -2,9 +2,14 @@ const functions = require('firebase-functions');
 const express = require('express');
 const app = express();
 
+// Print response with '+' as symbol for space
+function toString(board) {
+  return board.map(s => s === ' ' ? '+': s).join('');
+}
+
 // Return the current board
 app.get('/', (req, res) => {
-  res.send(board.current());
+  res.send(toString(board.current()));
 });
 
 // Play the next move if its bots turn
@@ -16,8 +21,8 @@ app.put('/:board', (req, res) => {
   let newBoard = req.params['board'].split('');
 
   if (board.myTurn()) {
-    let current = board.play(newBoard);
-    res.send(current);
+    let currentBoard = board.play(newBoard);
+    res.send(toString(currentBoard));
   } else {
     // Not the servers turn
     // Bad request
