@@ -4,6 +4,11 @@ let currentBoard = [ ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' ];
 
 const x = 'x', o = 'o';
 
+// Use minimax algorithm to find the best move
+function minimax() {
+  return 0;
+}
+
 module.exports = {
   myTurn() {
     let spots = {
@@ -14,6 +19,8 @@ module.exports = {
     return (spots.o === spots.x || spots.o < spots.x);
   },
   play(board) {
+    let bestMove = minimax(board, o).index;
+    board[bestMove] = o;
     currentBoard = board;
 
     return currentBoard;
