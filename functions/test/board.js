@@ -43,4 +43,11 @@ describe('Board', function() {
       assert.equal(true, result);
     });
   });
+
+  describe('best move for x to win', function() {
+    it('should be index 2', function() {
+      let result = board._minimax(['x','x',' ',' ','o','o',' ',' ',' '], 'x');
+      assert.equal(2, result.index);
+    });
+  });
 });

@@ -88,6 +88,24 @@ function minimax(board, player) {
 
   // Loop through all the playable indexes
   // Play each possibility recursively
+  let best = null;
+  moves.forEach(m => {
+    // Current player plays
+    board[m] = player;
+
+    // Simulate next player move
+    let result = player === o ? minimax(board, x) : minimax(board, o);
+
+    // Reset the board
+    board[m] = ' ';
+
+    if (best === null) {
+      best = {
+        index: m,
+        score: result
+      }
+    }
+  });
   
   // Return the best move
   return 0;
