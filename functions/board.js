@@ -120,10 +120,10 @@ function minimax(board, player) {
 module.exports = {
   _won: won,
   _minimax: minimax,
-  myTurn() {
+  myTurn(board) {
     let spots = {
-      o: currentBoard.filter(s => s === o).length,
-      x: currentBoard.filter(s => s === x).length
+      o: board.filter(s => s === o).length,
+      x: board.filter(s => s === x).length
     };
     
     return (spots.o === spots.x || spots.o < spots.x);

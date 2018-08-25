@@ -27,14 +27,23 @@ app.get('/', (req, res) => {
 //      or
 // board/ ox     x
 app.put('/:board', (req, res) => {
-  let newBoard = req.params['board'].split('');
+
+  let newBoard = req.params['board'];
+  // Whitelist only allow x,o,+,[space] characters
+  if (newBoard.match(/[^xo\+\ ]+/g)) return res.sendStatus(400);
+
+  // Allow nxn tic tac toe
+  let temp = Math.floor(Math.sqrt(newBoard.length));
+  if (temp*temp !== newBoard.length) return res.sendStatus(400);
+
+  newBoard = newBoard.split('');
 
   // Clean input
   // Replace '+' to spaces
   newBoard = newBoard.map(s => s === "+" ? " ": s);
 
   lock.acquire("board", () => {
-    if (board.myTurn()) {
+    if (board.myTurn(newBoard)) {
       let currentBoard = board.play(newBoard);
       res.send(toString(currentBoard));
     } else {
