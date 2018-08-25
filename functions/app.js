@@ -30,7 +30,7 @@ app.put('/:board', (req, res) => {
 
   let newBoard = req.params['board'];
   // Whitelist only allow x,o,+,[space] characters
-  if (newBoard.match(/[^xo\+\ ]+/g)) return res.sendStatus(400);
+  if (newBoard.match(/[^xo+ ]+/g)) return res.sendStatus(400);
 
   // Allow nxn tic tac toe
   let temp = Math.floor(Math.sqrt(newBoard.length));
