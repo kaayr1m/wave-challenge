@@ -88,8 +88,7 @@ function minimax(board, player) {
 
   // Loop through all the playable indexes
   // Play each possibility recursively
-  let best = null;
-  moves.forEach(m => {
+  moves = moves.map(m => {
     // Current player plays
     board[m] = player;
 
@@ -99,19 +98,21 @@ function minimax(board, player) {
     // Reset the board
     board[m] = ' ';
 
-    if (best === null) {
-      best = {
-        index: result.index || m,
-        score: result.score
-      }
-    } else if (
-      (player === o && result.score < best.score) ||
-      (player === x && result.score > best.score)) {
-      best = result;
-    } else {
-      // should not reach this point
+    return {
+      index: m,
+      score: result.score
     }
   });
+
+  let best = {
+    score: player === o ? -1000 : 1000
+  };
+  moves.forEach(m => {
+    if ((player === o && m.score > best.score) ||
+      (player === x && m.score < best.score)) {
+      best = m;
+    } 
+  }); 
   
   // Return the best move
   return best;
@@ -129,8 +130,19 @@ module.exports = {
     return (spots.o === spots.x || spots.o < spots.x);
   },
   play(board) {
-    let bestMove = minimax(board, o).index;
-    board[bestMove] = o;
+    let spots = {
+      o: board.filter(s => s === o).length,
+      x: board.filter(s => s === x).length
+    };
+
+    let move;
+    if (spots.o === 0 && spots.x === 0) {
+      move = Math.floor(Math.random() * (board.length-1));
+    } else {
+      move = minimax(board, o).index;
+    }
+
+    board[move] = o;
     currentBoard = board;
 
     return currentBoard;
